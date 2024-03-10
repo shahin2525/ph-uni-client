@@ -1,22 +1,34 @@
-import { Layout, Menu } from "antd";
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
-import { createElement } from "react";
+import { Layout, Menu, MenuProps } from "antd";
 const { Header, Content, Footer, Sider } = Layout;
 
-const items = [
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  UserOutlined,
-].map((icon, index) => ({
-  key: String(index + 1),
-  icon: createElement(icon),
-  label: `nav ${index + 1}`,
-}));
+const items: MenuProps["items"] = [
+  {
+    key: 1,
+    label: "profile",
+  },
+  {
+    key: 2,
+    label: "user",
+  },
+  {
+    key: 3,
+    label: "admin",
+    children: [
+      {
+        key: 31,
+        label: "create admin",
+      },
+      {
+        key: 32,
+        label: "admin profile",
+      },
+    ],
+  },
+  {
+    key: 4,
+    label: "super admin",
+  },
+];
 
 const MainLayout = () => {
   return (
@@ -31,7 +43,17 @@ const MainLayout = () => {
           console.log(collapsed, type);
         }}
       >
-        <div className="demo-logo-vertical" />
+        <div
+          style={{
+            color: "white",
+            fontSize: "30px",
+            height: "4rem",
+            textAlign: "center",
+          }}
+        >
+          Ph-uni
+        </div>
+
         <Menu
           theme="dark"
           mode="inline"
@@ -39,7 +61,7 @@ const MainLayout = () => {
           items={items}
         />
       </Sider>
-      <Layout>
+      <Layout style={{ height: "100vh" }}>
         <Header style={{ padding: 0 }} />
         <Content style={{ margin: "24px 16px 0" }}>
           <div
