@@ -48,7 +48,9 @@ const MainLayout = () => {
             color: "white",
             fontSize: "30px",
             height: "4rem",
-            textAlign: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           Ph-uni
