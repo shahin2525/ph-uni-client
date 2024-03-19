@@ -1,8 +1,9 @@
-import { Layout, Menu } from "antd";
+import { Button, Layout } from "antd";
 import { Outlet } from "react-router-dom";
-import { adminPaths } from "../../routes/admin.routes";
-import { sidebarItemsGenerator } from "../../utils/sidebarItemsGenerator";
+import { useAppDispatch } from "../../redux/hook";
 import Sidebar from "./Sidebar";
+import { logout } from "../../redux/feature/auth/authSlice";
+
 const { Header, Content, Footer, Sider } = Layout;
 
 // const items: MenuProps["items"] = [
@@ -32,11 +33,18 @@ const { Header, Content, Footer, Sider } = Layout;
 // ];
 
 const MainLayout = () => {
+  const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <Layout>
       <Sidebar></Sidebar>
       <Layout style={{ height: "100vh" }}>
-        <Header style={{ padding: 0 }} />
+        <Header>
+          {" "}
+          <Button onClick={handleLogout}>Logout</Button>
+        </Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             style={{
@@ -47,9 +55,9 @@ const MainLayout = () => {
             <Outlet></Outlet>
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
+        {/* <Footer style={{ textAlign: "center" }}>
           Ant Design ©{new Date().getFullYear()} Created by Ant UED
-        </Footer>
+        </Footer> */}
       </Layout>
     </Layout>
   );
