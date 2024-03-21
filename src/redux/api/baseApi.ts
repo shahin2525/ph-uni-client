@@ -17,7 +17,7 @@ const baseQuery = fetchBaseQuery({
 });
 
 const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
-  const result = await baseQuery(args, api, extraOptions);
+  let result = await baseQuery(args, api, extraOptions);
   console.log(result);
   if (result.error?.status == 401) {
     console.log("sending refresh token");
@@ -34,6 +34,7 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
         token: data.data.accessToken,
       })
     );
+    result = await baseQuery(args, api, extraOptions);
   }
   return result;
 };
