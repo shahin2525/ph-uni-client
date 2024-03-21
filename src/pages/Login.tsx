@@ -7,6 +7,7 @@ import { verifyToken } from "../utils/verfyJwtToken";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import PHForm from "../components/form/PHForm";
+import PHInput from "../components/form/PHInput";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -45,13 +46,11 @@ const Login = () => {
   return (
     <PHForm onSubmit={onSubmit}>
       <div className="mt-2">
-        <label htmlFor="id">Id:</label>
-        <input type="text" id="id" {...register("userId")} />
+        <PHInput type="text" name="userId" label="ID:"></PHInput>
       </div>
 
       <div className="m-4">
-        <label htmlFor="password">Password:</label>
-        <input id="password" {...register("password")} />
+        <PHInput type="text" name="password" label="Password:"></PHInput>
       </div>
 
       <Button htmlType="submit">Login</Button>
