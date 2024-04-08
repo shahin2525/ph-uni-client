@@ -2,6 +2,7 @@ import { FieldValues } from "react-hook-form";
 import PHForm from "../../../components/form/PHForm";
 import PHInput from "../../../components/form/PHInput";
 import { Button, Col, Flex } from "antd";
+import PHSelect from "../../../components/form/PHSelect";
 
 const CreateAcademicSemester = () => {
   const onSubmit = (data: FieldValues) => {
@@ -13,6 +14,7 @@ const CreateAcademicSemester = () => {
         <PHForm onSubmit={onSubmit}>
           <PHInput type="text" name="name" label="name" />
           <PHInput type="text" name="year" label="year" />
+          <PHSelect label="name"></PHSelect>
           <Button htmlType="submit">Submit</Button>
         </PHForm>
       </Col>
