@@ -6,6 +6,8 @@ import PHSelect from "../../../components/form/PHSelect";
 import { monthOptions } from "../../../constants/global";
 import { semesterOptions } from "../../../constants/semeseter";
 import { academicSemesterSchema } from "../../../schemas/academicManagementSchema";
+import { useAddAcademicSemesterMutation } from "../../../redux/feature/admin/academicManagement.api";
+import { toast } from "sonner";
 
 const currentYear = new Date().getFullYear();
 const yearOptions = [0, 1, 2, 3, 4].map((number) => ({
@@ -14,7 +16,9 @@ const yearOptions = [0, 1, 2, 3, 4].map((number) => ({
 }));
 console.log(yearOptions);
 const CreateAcademicSemester = () => {
-  const onSubmit = (data: FieldValues) => {
+  const [addAcademicSemester] = useAddAcademicSemesterMutation();
+
+  const onSubmit = async (data: FieldValues) => {
     const name = semesterOptions[Number(data?.name) - 1]?.label;
 
     const semesterData = {
@@ -24,7 +28,13 @@ const CreateAcademicSemester = () => {
       startMonth: data.startMonth,
       endMonth: data.endMonth,
     };
-    console.log(semesterData);
+    try {
+      console.log(semesterData);
+      const res = await addAcademicSemester(semesterData);
+      console.log(res);
+    } catch (err) {
+      toast.error("something went wrong");
+    }
   };
 
   return (
